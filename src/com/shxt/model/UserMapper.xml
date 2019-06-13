@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.shxt.model.User">
+  	<resultMap type="com.shxt.model.User" id="UserBaseResultMap" autoMapping="true">
+  		<!-- 映射主键 -->
+  		<id property="userId" column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+  		<!-- 映射结果集 -->
+  		<result property="userName" column="user_name"/>
+  		<result property="pwd" column="password"/>
+  		<result property="account" column="account"/>
+  		<result property="fk_role_id" column="fk_role_id"/>
+  		<!-- 映射关联对象 -->
+  		<association property="role" column="fk_role_id" select="com.shxt.model.Role.load"></association>
+  	</resultMap>
+	<select id="load" parameterType="integer" resultMap="UserBaseResultMap">
+		select * from user where user_id=#{user_id}	
+	</select>
+  </mapper>
